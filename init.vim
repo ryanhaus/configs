@@ -12,6 +12,8 @@ set tabstop=4
 set shiftwidth=4
 set number
 set laststatus=3
+set shiftwidth=4 smarttab
+set expandtab
 
 lua << EOF
 
