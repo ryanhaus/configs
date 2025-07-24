@@ -5,9 +5,11 @@ Plug 'simrat39/rust-tools.nvim'
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 Plug 'projekt0n/github-nvim-theme'
+Plug 'morhetz/gruvbox'
 call plug#end()
 
-colorscheme github_light 
+set background=dark
+colorscheme gruvbox
 set tabstop=4
 set shiftwidth=4
 set number
@@ -22,6 +24,8 @@ local rt = require("rust-tools")
 local coq = require("coq")
 
 -- lsp.rust_analyzer.setup(coq.lsp_ensure_capabilities({}))
+
+let g:gruvbox_contrast_dark = "hard"
 
 rt.setup({
   server = {
