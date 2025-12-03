@@ -17,6 +17,8 @@ set laststatus=3
 set shiftwidth=4 smarttab
 set expandtab
 
+let NERDTreeIgnore = ['\.class']
+
 lua << EOF
 
 local rt = require("rust-tools")
