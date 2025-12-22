@@ -182,6 +182,14 @@ require("lazy").setup({
     {
         "lewis6991/gitsigns.nvim",
     },
+
+    -- Theme (gruvbox)
+    {
+        "ellisonleao/gruvbox.nvim",
+        priority = 1000,
+        config = true,
+        opts = {}
+    },
 })
 
 -- Auto show errors when hovering over
@@ -226,3 +234,11 @@ vim.api.nvim_create_autocmd("BufEnter", {
     end
 })
 ]]
+
+-- Configure theme (gruvbox)
+require("gruvbox").setup({
+    -- contrast = "hard",
+})
+
+vim.o.background = "dark"
+vim.cmd([[colorscheme gruvbox]])
