@@ -177,6 +177,11 @@ require("lazy").setup({
             },
         },
     },
+
+    -- Git integration
+    {
+        "lewis6991/gitsigns.nvim",
+    },
 })
 
 -- Auto show errors when hovering over
