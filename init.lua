@@ -149,6 +149,19 @@ require("lazy").setup({
             vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
     	end,
     },
+
+    -- Error browsing
+    {
+        "folke/trouble.nvim",
+        opts = {},
+        cmd = "Trouble",
+        keys = {
+            {
+                "<leader>xx",
+                "<cmd>Trouble diagnostics toggle<cr>",
+            },
+        },
+    },
 })
 
 -- Auto show errors when hovering over
