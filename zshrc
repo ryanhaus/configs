@@ -70,7 +70,12 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+    git
+    zsh-autosuggestions
+    you-should-use
+    zsh-bat
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -104,3 +109,4 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias vi=nvim
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
