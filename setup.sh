@@ -10,6 +10,8 @@ git clone https://github.com/folke/lazy.nvim.git ~/.local/share/nvim/lazy/lazy.n
 # get script directory
 DIR="$(cd $(dirname $0) && pwd)"
 
-# copy neovim config
+# copy configs
 mkdir -p ~/.config/nvim
-ln -s $DIR/init.lua ~/.config/nvim/init.lua || true
+ln -sf $DIR/init.lua ~/.config/nvim/init.lua
+
+ln -sf $DIR/zshrc ~/.zshrc
