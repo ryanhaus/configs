@@ -1,4 +1,8 @@
 #!/bin/sh
+# install packages/programs:
+echo Note: install latest release of Neovim from https://github.com/neovim/neovim
+sudo apt install ripgrep
+
 # download lazy.nvim
 git clone https://github.com/folke/lazy.nvim.git ~/.local/share/nvim/lazy/lazy.nvim || true
 
