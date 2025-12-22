@@ -162,6 +162,21 @@ require("lazy").setup({
             },
         },
     },
+
+    -- For remembering keybinds
+    {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        opts = {},
+        keys = {
+            {
+                "<leader>?",
+                function()
+                    require("which-key").show({ global = false })
+                end,
+            },
+        },
+    },
 })
 
 -- Auto show errors when hovering over
