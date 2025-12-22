@@ -1,9 +1,10 @@
 #!/bin/sh
-# install packages/programs:
-echo Note: install latest release of Neovim from https://github.com/neovim/neovim
-sudo apt install ripgrep
+# Setup zsh
+sudo apt install zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-# download lazy.nvim
+# Setup neovim
+sudo apt install git ripgrep neovim
 git clone https://github.com/folke/lazy.nvim.git ~/.local/share/nvim/lazy/lazy.nvim || true
 
 # get script directory
@@ -11,4 +12,4 @@ DIR="$(cd $(dirname $0) && pwd)"
 
 # copy neovim config
 mkdir -p ~/.config/nvim
-ln -s $DIR/init.lua ~/.config/nvim/init.lua
+ln -s $DIR/init.lua ~/.config/nvim/init.lua || true
