@@ -139,6 +139,15 @@ require("lazy").setup({
     {
         "nvim-telescope/telescope.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
+        config = function()
+            local telescope = require("telescope")
+            telescope.setup({})
+
+            -- set keybinds
+            vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
+            vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
+            vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
+    	end,
     },
 })
 
@@ -165,6 +174,7 @@ require("nvim-tree").setup({
     },
 })
 
+--[[
 -- Open tree on nvim startup
 vim.api.nvim_create_autocmd("VimEnter", {
     callback = function()
@@ -182,3 +192,4 @@ vim.api.nvim_create_autocmd("BufEnter", {
         end
     end
 })
+]]
