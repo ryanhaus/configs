@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+source "./packages.sh"
+source "./zsh.sh"
+source "./neovim.sh"
+
+install_packages
+install_oh_my_zsh
+install_neovim
+
+echo Done
