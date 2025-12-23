@@ -16,8 +16,6 @@ install_neovim() {
         | sed -E 's/.*"v([^"]+)".*/\1/')
     URL="https://github.com/neovim/neovim/releases/download/v$LATEST/nvim-$NVIM_ARCH.tar.gz"
 
-    echo $URL
-
     TMP=$(mktemp -d)
     curl -L "$URL" -o "$TMP/nvim.tar.gz"
 
