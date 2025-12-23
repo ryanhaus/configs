@@ -12,7 +12,7 @@ sudo apt install bat
 git clone https://github.com/fdellwing/zsh-bat.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-bat || true
 
 # Setup neovim (assume neovim is already installed)
-sudo apt install git ripgrep
+sudo apt install git ripgrep nodejs npm
 git clone https://github.com/folke/lazy.nvim.git ~/.local/share/nvim/lazy/lazy.nvim || true
 
 # get script directory
