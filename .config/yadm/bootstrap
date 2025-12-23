@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-source "~/.config/yadm/packages.sh"
-source "~/.config/yadm/zsh.sh"
-source "./.config/yadm/neovim.sh"
+source "$HOME/.config/yadm/packages.sh"
+source "$HOME/.config/yadm/zsh.sh"
+source "$HOME/.config/yadm/neovim.sh"
 
 install_packages
 install_oh_my_zsh
