@@ -190,6 +190,9 @@ require("lazy").setup({
         config = true,
         opts = {}
     },
+
+    -- Icons
+    { "nvim-tree/nvim-web-devicons", opts = {} },
 })
 
 -- Auto show errors when hovering over
