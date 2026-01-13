@@ -54,3 +54,8 @@ if [ -n "$WSL_DISTRO_NAME" ]; then
             "$WINDOWS_USER_DIR/uncap.exe" >/dev/null 2>&1 &
     fi
 fi
+
+# Cargo (if installed)
+if [ -r "$HOME/.cargo/env" ]; then
+    . "$HOME/.cargo/env"
+fi
