@@ -44,4 +44,9 @@ install_packages() {
             > mason-receipt.json
         cd -
     fi
+
+    # WSL-only packages
+    if [ -n "$WSL_DISTRO_NAME" ]; then
+        eval "$PKG_MGR_CMD wslu"
+    fi
 }
