@@ -2,11 +2,11 @@
 set -Eeuo pipefail
 
 source "$HOME/.config/yadm/packages.sh"
-source "$HOME/.config/yadm/zsh.sh"
 source "$HOME/.config/yadm/neovim.sh"
 
 install_packages
-install_oh_my_zsh
 install_neovim
+
+sudo chsh -s /bin/bash
 
 echo Done

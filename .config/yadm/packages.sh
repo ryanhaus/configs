@@ -4,15 +4,12 @@ PACKAGES=(
     # general
     git
     curl
+    bat
 
     # for neovim
     ripgrep
     nodejs
     npm
-
-    # for zsh
-    zsh
-    bat
 )
 
 detect_package_manager() {
