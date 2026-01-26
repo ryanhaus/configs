@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# Packages to be installed by system package manager
 PACKAGES=(
     # general
     git
@@ -8,8 +9,7 @@ PACKAGES=(
 
     # for neovim
     ripgrep
-    nodejs
-    npm
+    # nodejs, npm installed separately
 )
 
 detect_package_manager() {
@@ -28,8 +28,14 @@ detect_package_manager() {
 }
 
 install_packages() {
+    # Install package manager packages
     detect_package_manager
     eval "$PKG_MGR_CMD ${PACKAGES[*]}"
+
+    # Install nodejs and npm (using nvm)
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+    \. "$HOME/.nvm/nvm.sh"
+    nvm install --lts
 
     # Fix for ARM systems to manually install clangd for Mason
     ARCH=$(uname -m)
