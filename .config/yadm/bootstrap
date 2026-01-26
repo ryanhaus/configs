@@ -4,9 +4,16 @@ set -Eeuo pipefail
 source "$HOME/.config/yadm/packages.sh"
 source "$HOME/.config/yadm/neovim.sh"
 
+# Install things
 install_packages
 install_neovim
 
-sudo chsh -s /bin/bash
+# WSL-only
+if [ -n "$WSL_DISTRO_NAME" ]; then
+    WINDOWS_USER_DIR="$(wslpath "$(wslvar USERPROFILE)")"
+
+    # Create ~/win directory pointing to Windows home directory
+    ln -s $WINDOWS_USER_DIR ~/win
+fi
 
 echo Done
