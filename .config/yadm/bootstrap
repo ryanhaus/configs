@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -Eeuo pipefail
+# set -Eeuo pipefail
 
 source "$HOME/.config/yadm/packages.sh"
 source "$HOME/.config/yadm/neovim.sh"
@@ -16,4 +16,5 @@ if [ -n "$WSL_DISTRO_NAME" ]; then
     ln -s $WINDOWS_USER_DIR ~/win
 fi
 
+source ~/.bashrc
 echo Done
