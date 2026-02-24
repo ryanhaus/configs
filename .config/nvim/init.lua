@@ -34,7 +34,6 @@ require("lazy").setup({
                 "verilog",
                 "systemverilog",
                 "lua",
-                "matlab",
             },
             highlight = { enable = true },
         },
@@ -54,7 +53,6 @@ require("lazy").setup({
                 "pyright",
                 "svlangserver",
                 "lua_ls",
-                "matlab_ls",
             },
         },
     },
@@ -195,6 +193,16 @@ require("lazy").setup({
 
     -- Icons
     { "nvim-tree/nvim-web-devicons", opts = {} },
+
+    -- Type hint toggling
+    {
+        "MysticalDevil/inlay-hints.nvim",
+        event = "LspAttach",
+        dependencies = { "neovim/nvim-lspconfig" },
+        config = function()
+            require("inlay-hints").setup()
+        end,
+    },
 })
 
 -- Auto show errors when hovering over
@@ -247,3 +255,26 @@ require("gruvbox").setup({
 
 vim.o.background = "dark"
 vim.cmd([[colorscheme gruvbox]])
+
+-- rust_analyzer config
+vim.lsp.config("rust_analyzer", {
+    settings = {
+        ["rust-analyzer"] = {
+            inlayHints = {
+                typeHints = { enable = true },
+                parameterHints = { enable = true },
+                chainingHints = { enable = true},
+            },
+        },
+    },
+})
+
+-- Enable type hints
+vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if client and client.supports_method("textDocument/inlayHint") then
+            vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
+        end
+    end,
+})
