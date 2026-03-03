@@ -18,7 +18,7 @@ vim.opt.relativenumber = true
 vim.opt.updatetime = 250
 
 -- Plugins
-vim.opt.rtp:prepend("~/.local/share/nvim/lazy/lazy.nvim")
+vim.opt.rtp:prepend(vim.fn.stdpath('data') .. '/lazy/lazy.nvim')
 
 require("lazy").setup({
     -- Syntax highlighting
@@ -34,6 +34,8 @@ require("lazy").setup({
                 "verilog",
                 "systemverilog",
                 "lua",
+                "markdown",
+                "markdown_inline",
             },
             highlight = { enable = true },
         },
@@ -53,6 +55,7 @@ require("lazy").setup({
                 "pyright",
                 "svlangserver",
                 "lua_ls",
+                "marksman",
             },
         },
     },
@@ -203,6 +206,9 @@ require("lazy").setup({
             require("inlay-hints").setup()
         end,
     },
+
+    -- Copilot
+    { "github/copilot.vim" },
 })
 
 -- Auto show errors when hovering over
