@@ -6,7 +6,12 @@ source "$HOME/.config/yadm/neovim.sh"
 
 # Install things
 install_packages
-install_neovim
+
+# Only install nvim on ubuntu
+source /etc/os-release
+if [[ "$ID" == "ubuntu" ]]; then
+    install_neovim
+fi
 
 # WSL-only
 if [ -n "$WSL_DISTRO_NAME" ]; then
