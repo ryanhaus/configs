@@ -28,6 +28,11 @@ install_lazy_nvim() {
 }
 
 install_neovim() {
-    install_neovim_bin
+    # Only install the neovim binary on ubuntu
+    source /etc/os-release
+    if [[ "$ID" == "ubuntu" ]]; then
+        install_neovim_bin
+    fi
+    
     install_lazy_nvim
 }
