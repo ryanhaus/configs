@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-install_neovim_bin() {
+install_neovim_bin_from_git() {
     ARCH=$(uname -m)
     case "$ARCH" in
         x86_64) NVIM_ARCH="linux-x86_64" ;;
@@ -23,16 +23,24 @@ install_neovim_bin() {
     rm -rf "$TMP"
 }
 
+install_neovim_bin() {
+    # Install the neovim binary manually on ubuntu
+    source /etc/os-release
+
+    if [[ "$ID" == "ubuntu" ]]; then
+        install_neovim_bin_from_git
+    elif [[ "$ID" == "fedora" ]]; then
+        sudo dnf install neovim
+    else
+        echo "WARNING: neovim was not installed automatically"
+    fi
+}
+
 install_lazy_nvim() {
     git clone https://github.com/folke/lazy.nvim.git ~/.local/share/nvim/lazy/lazy.nvim || true
 }
 
 install_neovim() {
-    # Only install the neovim binary on ubuntu
-    source /etc/os-release
-    if [[ "$ID" == "ubuntu" ]]; then
-        install_neovim_bin
-    fi
-    
+    install_neovim_bin
     install_lazy_nvim
 }
