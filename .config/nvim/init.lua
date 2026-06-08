@@ -154,6 +154,7 @@ require("lazy").setup({
             vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
             vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
             vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
+            vim.keymap.set("n", "<leader>fs", "<cmd>Telescope current_buffer_fuzzy_find<cr>")
     	end,
     },
 
