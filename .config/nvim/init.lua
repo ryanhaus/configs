@@ -207,8 +207,16 @@ require("lazy").setup({
         end,
     },
 
-    -- Copilot
-    { "github/copilot.vim" },
+    -- Markdown preview
+    {
+        "iamcco/markdown-preview.nvim",
+        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+        build = "cd app && yarn install",
+        init = function()
+            vim.g.mkdp_filetypes = { "markdown" }
+        end,
+        ft = { "markdown" },
+    },
 })
 
 -- Auto show errors when hovering over
