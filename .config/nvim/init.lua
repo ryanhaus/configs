@@ -78,7 +78,7 @@ require("lazy").setup({
             })
 
             vim.keymap.set('n', '<leader>h', function()
-                vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ 0 }), { bufnr = 0 })
+                vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })
             end, { desc = 'Toggle LSP Inlay Hints' })
         end,
     },
@@ -192,12 +192,12 @@ require("lazy").setup({
     },
 
     -- Theme (gruvbox)
-    {
-        "ellisonleao/gruvbox.nvim",
-        priority = 1000,
-        config = true,
-        opts = {}
-    },
+    -- {
+    --     "ellisonleao/gruvbox.nvim",
+    --     priority = 1000,
+    --     config = true,
+    --     opts = {}
+    -- },
 
     -- Icons
     { "nvim-tree/nvim-web-devicons", opts = {} },
@@ -246,16 +246,21 @@ require("lazy").setup({
     },
 
     -- Better w, e, b movements
-    {
-        "chrisgrieser/nvim-spider",
-        lazy = true,
-	    keys = {
-	    	{ "w", "<cmd>lua require('spider').motion('w')<CR>", mode = { "n", "o", "x" } },
-	    	{ "e", "<cmd>lua require('spider').motion('e')<CR>", mode = { "n", "o", "x" } },
-	    	{ "b", "<cmd>lua require('spider').motion('b')<CR>", mode = { "n", "o", "x" } },
-	    	{ "ge", "<cmd>lua require('spider').motion('ge')<CR>", mode = { "n", "o", "x" } },
-	    },
-    },
+    -- {
+    --     "chrisgrieser/nvim-spider",
+    --     lazy = true,
+    --  keys = {
+    --  	{ "w", "<cmd>lua require('spider').motion('w')<CR>", mode = { "n", "o", "x" } },
+    --  	{ "e", "<cmd>lua require('spider').motion('e')<CR>", mode = { "n", "o", "x" } },
+    --  	{ "b", "<cmd>lua require('spider').motion('b')<CR>", mode = { "n", "o", "x" } },
+    --  	{ "ge", "<cmd>lua require('spider').motion('ge')<CR>", mode = { "n", "o", "x" } },
+    --  },
+    --     config = function()
+    --         require("spider").setup({
+    --             skip_insignificant_punctuation = false,
+    --         })
+    --     end
+    -- },
 
     -- Integration with zellij and better window navigation
     {
@@ -269,6 +274,24 @@ require("lazy").setup({
             { "<c-l>", "<cmd>ZellijNavigateRightTab<cr>",   { silent = true, desc = "navigate right or tab" } },
         },
         opts = {},
+    },
+
+    -- Github themes
+    {
+        'projekt0n/github-nvim-theme',
+        lazy = false,
+        priority = 1000,
+        config = function()
+            vim.opt.background = "light"
+
+            require("github-theme").setup({
+                options = {
+                    theme_style = "github_light",
+                }
+            })
+
+            vim.cmd("colorscheme github_light")
+        end
     }
 })
 
@@ -316,12 +339,12 @@ vim.api.nvim_create_autocmd("BufEnter", {
 ]]
 
 -- Configure theme (gruvbox)
-require("gruvbox").setup({
-    -- contrast = "hard",
-})
+-- require("gruvbox").setup({
+--     -- contrast = "hard",
+-- })
 
-vim.o.background = "dark"
-vim.cmd([[colorscheme gruvbox]])
+-- vim.o.background = "dark"
+-- vim.cmd([[colorscheme gruvbox]])
 
 -- rust_analyzer config
 vim.lsp.config("rust_analyzer", {
@@ -338,3 +361,6 @@ vim.lsp.config("rust_analyzer", {
 
 -- Keep track of undo history in a file
 vim.opt.undofile = true
+
+-- Unhighlight search results when pressing esc
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
