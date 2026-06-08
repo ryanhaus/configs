@@ -63,7 +63,7 @@ require("lazy").setup({
         "neovim/nvim-lspconfig",
         config = function()
             vim.lsp.config("clangd", {})
-            vim.lsp.config("rust_analyzer", {})
+            vim.lsp.config("rust_analyzr", {})
             vim.lsp.config("pyright", {})
             vim.lsp.config("svlangserver", {})
 
@@ -76,6 +76,10 @@ require("lazy").setup({
                     },
                 },
             })
+
+            vim.keymap.set('n', '<leader>h', function()
+                vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ 0 }), { bufnr = 0 })
+            end, { desc = 'Toggle LSP Inlay Hints' })
         end,
     },
 
@@ -197,16 +201,6 @@ require("lazy").setup({
     -- Icons
     { "nvim-tree/nvim-web-devicons", opts = {} },
 
-    -- Type hint toggling
-    {
-        "MysticalDevil/inlay-hints.nvim",
-        event = "LspAttach",
-        dependencies = { "neovim/nvim-lspconfig" },
-        config = function()
-            require("inlay-hints").setup()
-        end,
-    },
-
     -- Markdown preview
     {
         "iamcco/markdown-preview.nvim",
@@ -217,6 +211,64 @@ require("lazy").setup({
         end,
         ft = { "markdown" },
     },
+
+    -- Undo tree
+    {
+        "mbbill/undotree",
+        cmd = "UndotreeToggle",
+        keys = {
+            { "<leader>u", "<cmd>UndotreeToggle<cr>", desc = "Toggle undotree" }
+        },
+    },
+
+    -- Search & jump labels
+    {
+        "folke/flash.nvim",
+        event = "VeryLazy",
+        ---@type Flash.Config
+        opts = {},
+        keys = {
+            { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+            { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+            { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+            { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+            { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+        },
+    },
+
+    -- Help learn/visualize movement commands
+    {
+        "tris203/precognition.nvim",
+        opts = {
+            startVisible = false
+        }
+    },
+
+    -- Better w, e, b movements
+    {
+        "chrisgrieser/nvim-spider",
+        lazy = true,
+	    keys = {
+	    	{ "w", "<cmd>lua require('spider').motion('w')<CR>", mode = { "n", "o", "x" } },
+	    	{ "e", "<cmd>lua require('spider').motion('e')<CR>", mode = { "n", "o", "x" } },
+	    	{ "b", "<cmd>lua require('spider').motion('b')<CR>", mode = { "n", "o", "x" } },
+	    	{ "ge", "<cmd>lua require('spider').motion('ge')<CR>", mode = { "n", "o", "x" } },
+	    },
+    },
+
+    -- Integration with zellij and better window navigation
+    {
+        "swaits/zellij-nav.nvim",
+        lazy = true,
+        event = "VeryLazy",
+        keys = {
+            { "<c-h>", "<cmd>ZellijNavigateLeftTab<cr>",    { silent = true, desc = "navigate left or tab"  } },
+            { "<c-j>", "<cmd>ZellijNavigateDown<cr>",       { silent = true, desc = "navigate down"         } },
+            { "<c-k>", "<cmd>ZellijNavigateUp<cr>",         { silent = true, desc = "navigate up"           } },
+            { "<c-l>", "<cmd>ZellijNavigateRightTab<cr>",   { silent = true, desc = "navigate right or tab" } },
+        },
+        opts = {},
+    }
 })
 
 -- Auto show errors when hovering over
@@ -283,12 +335,5 @@ vim.lsp.config("rust_analyzer", {
     },
 })
 
--- Enable type hints
-vim.api.nvim_create_autocmd("LspAttach", {
-    callback = function(args)
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
-        if client and client.supports_method("textDocument/inlayHint") then
-            vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
-        end
-    end,
-})
+-- Keep track of undo history in a file
+vim.opt.undofile = true
