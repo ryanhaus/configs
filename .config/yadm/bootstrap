@@ -13,7 +13,7 @@ if [ -n "$WSL_DISTRO_NAME" ]; then
     WINDOWS_USER_DIR="$(wslpath "$(wslvar USERPROFILE)")"
 
     # Create ~/win directory pointing to Windows home directory
-    ln -s $WINDOWS_USER_DIR ~/win
+    ln -s $WINDOWS_USER_DIR ~/win || true
 fi
 
 source ~/.bashrc

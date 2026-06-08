@@ -28,17 +28,21 @@ detect_package_manager() {
 }
 
 install_packages() {
+    ARCH=$(uname -m)
+
     # Install package manager packages
     detect_package_manager
     eval "$PKG_MGR_CMD ${PACKAGES[*]}"
 
     # Install nodejs and npm (using nvm)
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.5/install.sh | bash
     \. "$HOME/.nvm/nvm.sh"
     nvm install --lts
 
+    # Install zellij
+    wget -O - "https://github.com/zellij-org/zellij/releases/latest/download/zellij-$(uname -m)-unknown-linux-musl.tar.gz" | sudo tar -xzvf - -C /usr/bin "zellij"
+
     # Fix for ARM systems to manually install clangd for Mason
-    ARCH=$(uname -m)
     if [[ "$ARCH" == "aarch64" ]]; then
         # From https://github.com/mason-org/mason.nvim/issues/1578#issuecomment-2455253723
         eval "$PKG_MGR_CMD mason clangd jq"
@@ -55,4 +59,5 @@ install_packages() {
     if [ -n "$WSL_DISTRO_NAME" ]; then
         eval "$PKG_MGR_CMD wslu"
     fi
+
 }
