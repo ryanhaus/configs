@@ -20,11 +20,6 @@ vim.opt.laststatus = 3
 vim.opt.undofile = true
 vim.opt.updatetime = 250
 
--- Set theme
-vim.opt.termguicolors = true
-vim.opt.background = "light"
-vim.cmd.colorscheme("catppuccin")
-
 -- Unhighlight search results when pressing esc
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
@@ -352,3 +347,8 @@ require("lazy").setup({
         event = "VeryLazy",
     },
 })
+
+-- Set theme
+vim.opt.termguicolors = true
+vim.opt.background = "light"
+vim.cmd.colorscheme("catppuccin")
