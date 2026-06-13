@@ -16,5 +16,8 @@ if [ -n "$WSL_DISTRO_NAME" ]; then
     ln -s $WINDOWS_USER_DIR ~/win || true
 fi
 
+# Run ~/.config/bashrc-extra.sh with .bashrc
+echo "source ~/.config/bashrc-extra.sh" >> ~/.bashrc
+
 source ~/.bashrc
 echo Done
