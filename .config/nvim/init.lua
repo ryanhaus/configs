@@ -28,6 +28,19 @@ vim.cmd.colorscheme("catppuccin")
 -- Unhighlight search results when pressing esc
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+-- Configure autocomplete to not automatically select anything
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
+
+-- Auto show errors when hovering over
+vim.api.nvim_create_autocmd("CursorHold", {
+    callback = function()
+        vim.diagnostic.open_float(nil, {
+            focus = false,
+            scope = "cursor",
+        })
+    end,
+})
+
 -- Plugins
 vim.opt.rtp:prepend(vim.fn.stdpath('data') .. '/lazy/lazy.nvim')
 
@@ -55,7 +68,7 @@ require("lazy").setup({
     -- Error highlighting / LSP
     {
         "williamboman/mason.nvim",
-        config = true,
+        config = true
     },
     {
         "williamboman/mason-lspconfig.nvim",
@@ -83,6 +96,18 @@ require("lazy").setup({
                     Lua = {
                         diagnostics = {
                             globals = { "vim" }, -- to resolve 'Undefined global vim'
+                        },
+                    },
+                },
+            })
+
+            vim.lsp.config("rust_analyzer", {
+                settings = {
+                    ["rust-analyzer"] = {
+                        inlayHints = {
+                            typeHints = { enable = true },
+                            parameterHints = { enable = true },
+                            chainingHints = { enable = true},
                         },
                     },
                 },
@@ -145,12 +170,6 @@ require("lazy").setup({
                 },
             })
         end,
-    },
-
-    -- File tree
-    {
-        "nvim-tree/nvim-tree.lua",
-        config = true,
     },
 
     -- Fuzzy finder
@@ -240,8 +259,8 @@ require("lazy").setup({
         ---@type Flash.Config
         opts = {},
         keys = {
-            { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-            { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+            { "<leader>s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+            { "<leader>S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
             { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
             { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
             { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
@@ -324,69 +343,12 @@ require("lazy").setup({
         -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
         -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
         lazy = false,
-    }
-})
-
--- Auto show errors when hovering over
-vim.api.nvim_create_autocmd("CursorHold", {
-    callback = function()
-        vim.diagnostic.open_float(nil, {
-            focus = false,
-            scope = "cursor",
-        })
-    end,
-})
-
--- Configure autocomplete to not automatically select anything
-vim.opt.completeopt = { "menu", "menuone", "noselect" }
-
--- Configure nvim-tree
-require("nvim-tree").setup({
-    hijack_cursor = true,
-    update_cwd = true,
-    view = {
-        width = 30,
-        side = "left",
     },
-})
 
---[[
--- Open tree on nvim startup
-vim.api.nvim_create_autocmd("VimEnter", {
-    callback = function()
-        require("nvim-tree.api").tree.open()
-        vim.cmd("wincmd p") -- Move cursor back to buffer, not tree
-    end
-})
-
--- Close tree on last buffer close
-vim.api.nvim_create_autocmd("BufEnter", {
-    nested = true,
-    callback = function()
-        if #vim.api.nvim_list_wins() == 1 and vim.bo.filetype == "NvimTree" then
-            vim.cmd "quit"
-        end
-    end
-})
-]]
-
--- Configure theme (gruvbox)
--- require("gruvbox").setup({
---     -- contrast = "hard",
--- })
-
--- vim.o.background = "dark"
--- vim.cmd([[colorscheme gruvbox]])
-
--- rust_analyzer config
-vim.lsp.config("rust_analyzer", {
-    settings = {
-        ["rust-analyzer"] = {
-            inlayHints = {
-                typeHints = { enable = true },
-                parameterHints = { enable = true },
-                chainingHints = { enable = true},
-            },
-        },
+    -- Surrounding text
+    {
+        "kylechui/nvim-surround",
+        version = "^4.0.0", -- Use for stability; omit to use `main` branch for the latest features
+        event = "VeryLazy",
     },
 })
