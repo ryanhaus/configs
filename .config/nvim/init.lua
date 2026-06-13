@@ -1,21 +1,32 @@
 -- Vim options
+-- Leader key = space
 vim.g.mapleader = " "
 
+-- Tabs
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 
-vim.opt.termguicolors = true
-
+-- Lign numbers
 vim.opt.signcolumn = "yes"
-
 vim.opt.number = true
 vim.opt.relativenumber = true
 
--- vim.opt.laststatus = 3
+-- Line under window
+vim.opt.laststatus = 3
 
+-- Log undo
+vim.opt.undofile = true
 vim.opt.updatetime = 250
+
+-- Set theme
+vim.opt.termguicolors = true
+vim.opt.background = "light"
+vim.cmd.colorscheme("catppuccin")
+
+-- Unhighlight search results when pressing esc
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Plugins
 vim.opt.rtp:prepend(vim.fn.stdpath('data') .. '/lazy/lazy.nvim')
@@ -63,7 +74,7 @@ require("lazy").setup({
         "neovim/nvim-lspconfig",
         config = function()
             vim.lsp.config("clangd", {})
-            vim.lsp.config("rust_analyzr", {})
+            vim.lsp.config("rust_analyzer", {})
             vim.lsp.config("pyright", {})
             vim.lsp.config("svlangserver", {})
 
@@ -200,7 +211,7 @@ require("lazy").setup({
     -- },
 
     -- Icons
-    { "nvim-tree/nvim-web-devicons", opts = {} },
+    -- { "nvim-tree/nvim-web-devicons", opts = {} },
 
     -- Markdown preview
     {
@@ -276,23 +287,24 @@ require("lazy").setup({
         opts = {},
     },
 
-    -- Github themes
-    {
-        'projekt0n/github-nvim-theme',
-        lazy = false,
-        priority = 1000,
-        config = function()
-            vim.opt.background = "light"
+    -- -- Github themes
+    -- {
+    --     'projekt0n/github-nvim-theme',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         require("github-theme").setup({
+    --             options = {
+    --                 theme_style = "github_light",
+    --             }
+    --         })
+    --
+    --         vim.cmd.colorscheme("github_light")
+    --     end
+    -- },
 
-            require("github-theme").setup({
-                options = {
-                    theme_style = "github_light",
-                }
-            })
-
-            vim.cmd("colorscheme github_light")
-        end
-    },
+    -- Theme
+    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 
     -- Better file browsing
     {
@@ -378,30 +390,3 @@ vim.lsp.config("rust_analyzer", {
         },
     },
 })
-
--- Add bottom line to all windows
-vim.opt.laststatus = 3
-
--- Keep track of undo history in a file
-vim.opt.undofile = true
-
--- Unhighlight search results when pressing esc
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-
--- set theme
-vim.api.nvim_create_autocmd("VimEnter", {
-    callback = function()
-        vim.cmd("colorscheme github_light")
-    end
-})
-
--- Auto switch between locked/unlocked mode in zellij when focusing/unfocusing nvim
---vim.api.nvim_create_autocmd("FocusGained", {
---    pattern = "*",
---    command = "silent !zellij action switch-mode locked"
---})
---
---vim.api.nvim_create_autocmd("FocusLost", {
---    pattern = "*",
---    command = "silent !zellij action switch-mode normal"
---})
