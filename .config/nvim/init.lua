@@ -254,8 +254,8 @@ require("lazy").setup({
         ---@type Flash.Config
         opts = {},
         keys = {
-            { "<leader>s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-            { "<leader>S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+            { "s", function() require("flash").jump() end, desc = "Flash" },
+            { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
             { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
             { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
             { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
@@ -345,6 +345,24 @@ require("lazy").setup({
         "kylechui/nvim-surround",
         version = "^4.0.0", -- Use for stability; omit to use `main` branch for the latest features
         event = "VeryLazy",
+        init = function()
+            vim.g.nvim_surround_no_mappings = true
+        end,
+        opts = {},
+        keys = {
+            -- Normal mode bindings using 'gs' instead of 'ys'
+            { "gs", "<Plug>(nvim-surround-normal)", desc = "Surround Operator" },
+            { "gss", "<Plug>(nvim-surround-normal-cur)", desc = "Surround Current Line" },
+            { "gS", "<Plug>(nvim-surround-normal-line)", desc = "Surround Operator (Line)" },
+            { "gSS", "<Plug>(nvim-surround-normal-cur-line)", desc = "Surround Line" },
+            { "ds", "<Plug>(nvim-surround-delete)", desc = "Delete Surround" },
+            { "cs", "<Plug>(nvim-surround-change)", desc = "Change Surround" },
+            { "cS", "<Plug>(nvim-surround-change-line)", desc = "Change Surround (Line)" },
+
+            -- Visual mode bindings
+            { "S", "<Plug>(nvim-surround-visual)", mode = "x", desc = "Visual Surround" },
+            { "gS", "<Plug>(nvim-surround-visual-line)", mode = "x", desc = "Visual Surround (Line)" },
+        },
     },
 })
 
