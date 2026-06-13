@@ -379,8 +379,29 @@ vim.lsp.config("rust_analyzer", {
     },
 })
 
+-- Add bottom line to all windows
+vim.opt.laststatus = 3
+
 -- Keep track of undo history in a file
 vim.opt.undofile = true
 
 -- Unhighlight search results when pressing esc
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+-- set theme
+vim.api.nvim_create_autocmd("VimEnter", {
+    callback = function()
+        vim.cmd("colorscheme github_light")
+    end
+})
+
+-- Auto switch between locked/unlocked mode in zellij when focusing/unfocusing nvim
+--vim.api.nvim_create_autocmd("FocusGained", {
+--    pattern = "*",
+--    command = "silent !zellij action switch-mode locked"
+--})
+--
+--vim.api.nvim_create_autocmd("FocusLost", {
+--    pattern = "*",
+--    command = "silent !zellij action switch-mode normal"
+--})
