@@ -42,6 +42,9 @@ install_packages() {
     # Install zellij
     wget -O - "https://github.com/zellij-org/zellij/releases/latest/download/zellij-$(uname -m)-unknown-linux-musl.tar.gz" | sudo tar -xzvf - -C /usr/bin "zellij"
 
+    # Install zoxide
+    curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+
     # Fix for ARM systems to manually install clangd for Mason
     if [[ "$ARCH" == "aarch64" ]]; then
         # From https://github.com/mason-org/mason.nvim/issues/1578#issuecomment-2455253723
