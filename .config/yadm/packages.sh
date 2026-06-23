@@ -6,7 +6,6 @@ PACKAGES=(
     git
     curl
     bat
-    typst
 
     # for neovim
     ripgrep
@@ -21,13 +20,10 @@ detect_package_manager() {
         PKG_MGR_CMD="sudo apt update && sudo apt install -y "
 
         # add repositories
-        sudo apt-add-repository ppa:fish-shell/release-4
+        sudo apt-add-repository ppa:fish-shell/release-4 -y
     elif command -v dnf >/dev/null; then
         PKG_MGR="dnf"
         PKG_MGR_CMD="sudo dnf install -y "
-
-        # enable coprs
-        yes | sudo dnf copr enable claaj/typst
     else
         echo "Unsupported package manager"
         exit 1
@@ -49,10 +45,15 @@ install_packages() {
     nvm install --lts
 
     # Install zellij
-    wget -O - "https://github.com/zellij-org/zellij/releases/latest/download/zellij-$(uname -m)-unknown-linux-musl.tar.gz" | sudo tar -xzvf - -C /usr/bin "zellij"
+    wget -O - "https://github.com/zellij-org/zellij/releases/latest/download/zellij-$(uname -m)-unknown-linux-musl.tar.gz" \
+        | sudo tar -xzvf - -C /usr/local/bin "zellij"
 
     # Install zoxide
     curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+
+    # Install typst
+    wget -O - "https://github.com/typst/typst/releases/latest/download/typst-$(uname -m)-unknown-linux-musl.tar.xz" \
+        | sudo tar -xJ --strip-components=1 -C /usr/local/bin --wildcards '*/typst'
 
     # Fix for ARM systems to manually install clangd for Mason
     if [[ "$ARCH" == "aarch64" ]]; then
