@@ -27,7 +27,7 @@ detect_package_manager() {
         PKG_MGR_CMD="sudo dnf install -y "
 
         # enable coprs
-        sudo dnf copr enable claaj/typst
+        yes | sudo dnf copr enable claaj/typst
     else
         echo "Unsupported package manager"
         exit 1
