@@ -9,13 +9,18 @@ PACKAGES=(
 
     # for neovim
     ripgrep
-    # nodejs, npm installed separately
+
+    # shell
+    fish
 )
 
 detect_package_manager() {
     if command -v apt >/dev/null; then
         PKG_MGR="apt"
         PKG_MGR_CMD="sudo apt update && sudo apt install -y "
+
+        # add repositories
+        sudo apt-add-repository ppa:fish-shell/release-4
     elif command -v dnf >/dev/null; then
         PKG_MGR="dnf"
         PKG_MGR_CMD="sudo dnf install -y "
