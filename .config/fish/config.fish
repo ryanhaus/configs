@@ -1,3 +1,8 @@
 if status is-interactive
-    # Commands to run in interactive sessions can go here
+    # set EDITOR to neovim
+    set -gx EDITOR nvim
+    set -gx VISUAL nvim
+
+    # initialize zoxide
+    zoxide init fish | source
 end

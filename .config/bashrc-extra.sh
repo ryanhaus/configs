@@ -1,4 +1,4 @@
 #!/bin/bash
-alias vi=nvim
-export EDITOR=vi
-eval "$(zoxide init bash)"
+if [[ $- == *i* ]]; then
+    exec fish
+fi
