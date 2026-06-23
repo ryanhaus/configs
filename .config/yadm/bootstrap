@@ -17,7 +17,9 @@ if [ -n "$WSL_DISTRO_NAME" ]; then
 fi
 
 # Run ~/.config/bashrc-extra.sh with .bashrc
-echo "source ~/.config/bashrc-extra.sh" >> ~/.bashrc
+BASHRC_APPEND_LINE="source ~/.config/bashrc-extra.sh"
+grep -qF "$BASHRC_APPEND_LINE" ~/.bashrc || echo "$BASHRC_APPEND_LINE" >> ~/.bashrc
+
 
 source ~/.bashrc
 echo Done
