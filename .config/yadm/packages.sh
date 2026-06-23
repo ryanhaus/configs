@@ -6,6 +6,7 @@ PACKAGES=(
     git
     curl
     bat
+    typst
 
     # for neovim
     ripgrep
@@ -24,6 +25,9 @@ detect_package_manager() {
     elif command -v dnf >/dev/null; then
         PKG_MGR="dnf"
         PKG_MGR_CMD="sudo dnf install -y "
+
+        # enable coprs
+        sudo dnf copr enable claaj/typst
     else
         echo "Unsupported package manager"
         exit 1
