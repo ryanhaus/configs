@@ -75,6 +75,7 @@ require("lazy").setup({
                 "svlangserver",
                 "lua_ls",
                 "marksman",
+                "tinymist",
             },
         },
     },
