@@ -1,0 +1,10 @@
+# tab navigation
+map <c-l> nextTab
+map <c-h> previousTab
+
+# scrolling
+map <c-u> scrollPageUp
+map <c-d> scrollPageDown
+
+map <c-b> scrollFullPageUp
+map <c-f> scrollFullPageDown
