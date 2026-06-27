@@ -6,5 +6,32 @@
 
 config_version: 2
 settings:
+  auto_save.session:
+    global: true
+  bindings.commands:
+    global:
+      normal:
+        <Ctrl+h>: tab-prev
+        <Ctrl+l>: tab-next
+        J: null
+        K: null
+        X: undo
+        d: null
+        u: null
+        x: tab-close
+  editor.command:
+    global:
+    - alacritty
+    - -e
+    - nvim
+    - -f
+    - '{file}'
+    - -c
+    - normal {line}G{column0}l
   scrolling.smooth:
     global: true
+  url.searchengines:
+    global:
+      DEFAULT: https://google.com/search?q={}
+  url.start_pages:
+    global: https://google.com
