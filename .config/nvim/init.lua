@@ -365,6 +365,17 @@ require("lazy").setup({
             { "gS", "<Plug>(nvim-surround-visual-line)", mode = "x", desc = "Visual Surround (Line)" },
         },
     },
+
+    -- Typst preview
+    {
+        'chomosuke/typst-preview.nvim',
+        lazy = false,
+        version = '1.*',
+        opts = {},
+        keys = {
+            { "<leader>t", "<cmd>TypstPreview<CR>" }
+        }
+    }
 })
 
 -- Set theme
