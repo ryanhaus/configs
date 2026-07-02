@@ -1,25 +1,23 @@
 #!/usr/bin/env bash
-# set -Eeuo pipefail
+# NOTE: assumes python3 is installed
 
-source "$HOME/.config/yadm/packages.sh"
-source "$HOME/.config/yadm/neovim.sh"
+# make sure pip is installed
+python3 -m ensurepip --upgrade
 
-# Install things
-install_packages
-install_neovim
-
-# WSL-only
-if [ -n "$WSL_DISTRO_NAME" ]; then
-    WINDOWS_USER_DIR="$(wslpath "$(wslvar USERPROFILE)")"
-
-    # Create ~/win directory pointing to Windows home directory
-    ln -s $WINDOWS_USER_DIR ~/win || true
+# create (if needed) & enter virtual environment to prevent 'externally managed' errors
+if [ ! -d "./venv" ]; then
+    python3 -m venv ./venv 
 fi
 
-# Run ~/.config/bashrc-extra.sh with .bashrc
-BASHRC_APPEND_LINE="source ~/.config/bashrc-extra.sh"
-grep -qF "$BASHRC_APPEND_LINE" ~/.bashrc || echo "$BASHRC_APPEND_LINE" >> ~/.bashrc
+source ./venv/bin/activate
 
+# install libraries needed for bootstrap script
+pip install questionary requests
 
-source ~/.bashrc
-echo Done
+# run bootstrap python script
+./bootstrap.py
+
+# exit venv
+deactivate
+
+echo "Done!"
