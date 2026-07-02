@@ -3,6 +3,13 @@ import questionary
 import sys
 import importlib
 
+from append_bashrc import append_bashrc
+from package_manager import detect_package_manager
+
+# initial function calls
+append_bashrc()
+detect_package_manager()
+
 # installation candidates
 options = [
     {
