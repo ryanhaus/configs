@@ -2,7 +2,7 @@
 live_config_reload = true
 
 [window]
-padding = { x = 10, y = 10 }
+padding = { x = 4, y = 4 }
 dynamic_title = true
 opacity = 0.9
 
