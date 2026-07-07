@@ -382,3 +382,13 @@ require("lazy").setup({
 vim.opt.termguicolors = true
 vim.opt.background = "light"
 vim.cmd.colorscheme("catppuccin")
+
+-- Keybind to open file under cursor with draw.io
+vim.keymap.set('n', '<leader>d', function()
+  local text = vim.fn.expand('<cfile>') -- get file under cursor
+  local filename = text:gsub("^%s*(.-)%s*$", "%1") -- strip whitespace
+
+  -- run draw.io
+  local cmd = {"drawio", filename}
+  vim.fn.jobstart(cmd, { detach = true })
+end, { desc = "Open with draw.io" })
