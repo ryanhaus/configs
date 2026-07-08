@@ -15,7 +15,7 @@ source ./venv/bin/activate
 pip install questionary requests
 
 # run bootstrap python script
-./bootstrap.py
+~/.config/yadm/bootstrap.py
 
 # exit venv
 deactivate
