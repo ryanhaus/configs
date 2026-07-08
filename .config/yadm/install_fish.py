@@ -1,4 +1,4 @@
-from utils import install_package
+from utils import install_package, run_web_script
 import subprocess
 
 def install_fish():
@@ -11,3 +11,7 @@ def install_fish():
     install_package("zellij") # terminal multiplexing
     install_package("zoxide") # smarter 'cd' command
     install_package("typst")  # for writing (typesetter)
+
+    # enter fish shell & install fisher
+    fisher_cmd = "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher update" # from fisher github
+    subprocess.run(["fish", "-c", fisher_cmd])

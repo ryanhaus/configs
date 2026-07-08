@@ -41,13 +41,11 @@ def install_package(package_name):
         print(f"Error installing '{package_name}': code {return_code}")
         sys.exit(return_code)
 
-# downloads & runs a script, equivalent to curl -o- [url] | bash
-def run_web_script(url):
-    # download script
+# downloads & runs a script, equivalent to curl -o- [url] | [run_with]
+def run_web_script(url, run_with="bash"):
+    # download script & run
     content = requests.get(url).text
-
-    # run in bash
-    return subprocess.run(["bash"], input=content, text=True)
+    return subprocess.run([run_with], input=content, text=True)
 
 # downloads a git repo to a particular directory, if it doesn't already exist. if it does, pull
 def pull_git_repo(url, location):
