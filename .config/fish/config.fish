@@ -6,3 +6,4 @@ if status is-interactive
     # initialize zoxide
     zoxide init fish | source
 end
+fish_add_path $HOME/.local/bin
