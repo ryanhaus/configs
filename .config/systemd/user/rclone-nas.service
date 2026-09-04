@@ -1,0 +1,19 @@
+[Unit]
+Description=Rclone for 'homelab-j5040'
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=notify
+ExecStart=/usr/bin/rclone mount homelab-j5040:/mnt/raid /mnt/homelab-j5040 \
+    --config=.config/rclone/rclone.conf \
+    --vfs-cache-mode full \
+    --vfs-cache-max-size 20G \
+    --vfs-cache-max-age 24h \
+    --vfs-read-chunk-size 64M
+ExecStop=/usr/bin/fusermount -u /mnt/homelab-j5040
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target
