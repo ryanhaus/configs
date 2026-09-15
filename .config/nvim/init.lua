@@ -53,6 +53,9 @@ vim.api.nvim_create_autocmd("CursorHold", {
     end,
 })
 
+-- space+s -> toggle spellcheck
+vim.keymap.set('n', '<leader>s', '<cmd>set spell!<CR>', { desc = 'Toggle spellcheck' })
+
 -- Plugins
 vim.opt.rtp:prepend(vim.fn.stdpath('data') .. '/lazy/lazy.nvim')
 
