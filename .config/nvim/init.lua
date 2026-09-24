@@ -424,6 +424,14 @@ require("lazy").setup({
             -- },
         },
     },
+
+    -- smooth scrolling
+    {
+      "karb94/neoscroll.nvim",
+      opts = {
+        easing_function = "quadratic",
+      },
+    }
 })
 
 -- Set theme
