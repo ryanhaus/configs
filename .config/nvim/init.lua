@@ -419,9 +419,9 @@ require("lazy").setup({
                 conceallevel = 2,
                 concealcursor = "n",
             },
-            image = {
-                enabled = true, -- set true to enable graphical equation conceal
-            },
+            -- image = {
+            --     enabled = true, -- set true to enable graphical equation conceal
+            -- },
         },
     },
 })
