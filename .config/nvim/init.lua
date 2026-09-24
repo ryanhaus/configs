@@ -407,21 +407,16 @@ require("lazy").setup({
         --- @type LaTeXConcealOptions
         opts = {
             conceal = {
-                "greek",
-                "script",
                 "math",
-                "font",
-                "delim",
-                "phy",
             },
-            ft = { "plaintex", "tex", "context", "bibtex", "markdown", "typst" },
+            ft = { "typst" },
             opt = {
                 conceallevel = 2,
-                concealcursor = "n",
+                concealcursor = "",
             },
-            -- image = {
-            --     enabled = true, -- set true to enable graphical equation conceal
-            -- },
+            image = {
+                enabled = true, -- set true to enable graphical equation conceal
+            },
         },
     },
 
