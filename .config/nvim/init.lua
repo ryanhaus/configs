@@ -398,28 +398,6 @@ require("lazy").setup({
         }
     },
 
-    -- Typst equation preview in-editor
-    {
-        "pxwg/math-conceal.nvim",
-        event = "VeryLazy",
-        main = "math-conceal",
-        build = "cargo build --release --manifest-path service/Cargo.toml", -- required for graphical equation conceal
-        --- @type LaTeXConcealOptions
-        opts = {
-            conceal = {
-                "math",
-            },
-            ft = { "typst" },
-            opt = {
-                conceallevel = 2,
-                concealcursor = "",
-            },
-            image = {
-                enabled = true, -- set true to enable graphical equation conceal
-            },
-        },
-    },
-
     -- smooth scrolling
     {
       "karb94/neoscroll.nvim",
