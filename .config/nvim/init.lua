@@ -421,3 +421,19 @@ vim.keymap.set('n', '<leader>d', function()
   local cmd = {"drawio", filename}
   vim.fn.jobstart(cmd, { detach = true })
 end, { desc = "Open with draw.io" })
+
+-- disable line wrapping, indicate when there is more to a line
+vim.opt.wrap = false
+vim.opt.list = true
+vim.opt.listchars:append("extends:>")
+vim.opt.listchars:append("precedes:<")
+
+-- dont auto insert new lines
+vim.opt.textwidth = 0
+vim.opt.wrapmargin = 0
+
+-- start scrolling a little bit before reaching end of screen
+vim.opt.scrolloff = 5
+
+vim.opt.sidescroll = 1
+vim.opt.sidescrolloff = 10
